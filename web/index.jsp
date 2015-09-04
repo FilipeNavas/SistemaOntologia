@@ -3,45 +3,109 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="Projeto de ferramenta de apoio à indexação de obras em uma acervo.">
+        <meta name="author" content="IFSP SBV">
+        <link rel="icon" href="../../favicon.ico">
         
-        <title>Catálogo Online - IFSP</title>
+        <!-- Bootstrap CSS -->
+        <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Custom CSS -->
+        <link href="${pageContext.request.contextPath}/resources/css/custom.css" rel="stylesheet">
+        
+        
+        <!-- JAVASCRIPT -->
+    
+        <!-- JQUERY -->
+        <!-- GOOGLE CDN  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>    -->
+        <!-- LOCAL -->      <script src="${pageContext.request.contextPath}/resources/js/jquery/jquery-2.1.4.min.js"></script>
+        
+        <!-- BOOTSTRAP -->
+        <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+        
+        <!-- CUSTOM JS -->
+        <script src="${pageContext.request.contextPath}/resources/js/custom.js"></script>
+    
+        <title>Inicio</title>
+        
+    </head>
    
-   </head>
-   
-    <body>    
+    <body>       
         
+       <!-- Static navbar -->
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="${pageContext.request.contextPath}/">Ontologia Indexador</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="${pageContext.request.contextPath}/">Ínicio</a></li>
+                <li><a href="${pageContext.request.contextPath}/buscaTextual.jsp">Busca Textual</a></li>
+                <li><a href="${pageContext.request.contextPath}/buscaVisual.jsp">Busca Visual</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="${pageContext.request.contextPath}/sobre.jsp">Sobre</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+    
+ 
+      
+        <div class="container">
+            
         
-    <div class="container-narrow">
-
-     
-      <div class="row-fluid marketing">
+            <div class="jumbotron centralizado">
+                <h1>Indexador Ontologia</h1>
+                <strong class="lead">
+                    Ferramenta de apoio à bibliotecários na indexação de obras no acervo.
+                </strong>
+            </div>
+        </div>
         
-        <jsp:include page="/includes/menu.jsp"/>
-
-
-         <div class="jumbotron">
-
-              <h1>Ontologia IFSP</h1>
-              <p class="lead">
-                  Catálogo Online para Bibliotecas V 1.1
-              </p>
-              <a class="btn btn-large btn-success" href="buscaTextual.jsp">Busca Textual</a>
-              <a class="btn btn-large btn-info" href="#">Busca Visual</a>
-
-         </div>
-          
-      </div>
-
-      <hr>
-
-     <jsp:include page="/includes/rodape.jsp"/>   
-
-    </div> <!-- /container -->
         
         
       
-    </body>
+        <footer class="footer">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <p class="text-muted">Desenvolvido por  <a href="https://github.com/willcehsar/">Willian César</a>  e <a href="https://github.com/FilipeNavas">Filipe Navas</a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <p class="text-muted">Orientado por Profª Dra. Rosana Ferrareto, Profº Ms. Gustavo Prieto e Ms. Maria Carolina</p>
+                    </div>
+                    <div class="col-md-1">
+                        <p class="text-muted"><a href="https://sbv.ifsp.edu.br/">IFSP</a></p>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </footer>
+      
+      
+  
 
+
+        
+        
+      
+  </body>      
+    
 </html>
-
+  
+  
+ 
+ 

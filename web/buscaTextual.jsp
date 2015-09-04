@@ -3,242 +3,246 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-2.0.2.min.js"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/vivagraph/vivagraph.min.js.js"></script>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="Projeto de ferramenta de apoio à indexação de obras em uma acervo.">
+        <meta name="author" content="IFSP SBV">
+        <link rel="icon" href="../../favicon.ico">
         
-        <title>Catálogo</title>
+        <!-- Bootstrap CSS -->
+        <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         
-     <script type="text/javascript">
-      $(document).ready(function() { 
-          
-        $("#enviar").click(function() {
-            
-            conceito = $("#conceito").val();
-            selecao = $("#selecao").val();
-                $.ajax({
-                    type : "POST",
-                   
-                    //url : "http://localhost:8084/SistemaOntologia/ServletPercorrerOntologia",
-                    //Esse comando abaixo pega o servidor(IP local) e a porta dinamicamente
-                    url : "http://<%= request.getServerName() + ":" + request.getServerPort() %>/SistemaOntologia/ServletPercorrerOntologia",
-                    data : "conceito=" + conceito + "&selecao=" + selecao,                    
-                    success : function(html) {
-                        $("#divAtualizar").replaceWith($('#divAtualizar', $(html)));  
-                        $("#divAtualizar").css( "visibility", "visible" ); 
-                        criarGrafo();
-                        //se entrou aqui é true, então tem q mostrar a div, então usa o jquery pra mudar
-                        //o css da div
-                      
-                    }
-                 });                 
-          return false;  
-        });
-      });   
-      
+        <!-- Custom CSS -->
+        <link href="${pageContext.request.contextPath}/resources/css/custom.css" rel="stylesheet">
+        
+        
+        <!-- JAVASCRIPT -->
     
-   </script>
+        <!-- JQUERY -->
+        <!-- GOOGLE CDN  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>    -->
+        <!-- LOCAL -->      <script src="${pageContext.request.contextPath}/resources/js/jquery/jquery-2.1.4.min.js"></script>
+        
+        <!-- BOOTSTRAP -->
+        <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
+        
+        <!-- BUSCA TEXTUAL JS -->
+        <script src="${pageContext.request.contextPath}/resources/js/busca_textual.js"></script>
+        
+        <!-- CUSTOM JS -->
+        <script src="${pageContext.request.contextPath}/resources/js/custom.js"></script>
+    
+        <title>Busca Textual</title>
    
+    </head>
    
-   <script type="text/javascript">
-        function criarGrafo() { 
-            var graph = Viva.Graph.graph();
-
-            // Construct the graph
-            graph.addNode('anvaka', {url : 'https://secure.gravatar.com/avatar/91bad8ceeec43ae303790f8fe238164b'});
-            graph.addNode('manunt', {url : 'https://secure.gravatar.com/avatar/c81bfc2cf23958504617dd4fada3afa8'});
-            //graph.addNode('thlorenz', {url : 'https://secure.gravatar.com/avatar/1c9054d6242bffd5fd25ec652a2b79cc'});
-            //graph.addNode('bling', {url : 'https://secure.gravatar.com/avatar/24a5b6e62e9a486743a71e0a0a4f71af'});
-            //graph.addNode('diyan', {url : 'https://secure.gravatar.com/avatar/01bce7702975191fdc402565bd1045a8?'});
-            //graph.addNode('pocheptsov', {url : 'https://secure.gravatar.com/avatar/13da974fc9716b42f5d62e3c8056c718'});
-            //graph.addNode('dimapasko', {url : 'https://secure.gravatar.com/avatar/8e587a4232502a9f1ca14e2810e3c3dd'});
-            
-            <c:forEach  var="livro" items="${livros}">
-               graph.addNode(${livro.titulo}, {url : 'https://secure.gravatar.com/avatar/8e587a4232502a9f1ca14e2810e3c3dd'});
-               
-               graph.addLink(${livro.titulo}, 'java');
-            </c:forEach>
-            
-            graph.addLink('anvaka', 'manunt');
-            
-
-            // Set custom nodes appearance
-            var graphics = Viva.Graph.View.svgGraphics();
-            graphics.node(function(node) {
-                   // The function is called every time renderer needs a ui to display node
-                   return Viva.Graph.svg('image')
-                         .attr('width', 24)
-                         .attr('height', 24)
-                         .link(node.data.url); // node.data holds custom object passed to graph.addNode();
-                })
-                .placeNode(function(nodeUI, pos){
-                    // Shift image to let links go to the center:
-                    nodeUI.attr('x', pos.x - 12).attr('y', pos.y - 12);
-                });
-
-            var renderer = Viva.Graph.View.renderer(graph, 
-                {
-                    graphics : graphics
-                });
-            renderer.run();
-        }
-    
-    
-    </script>       
-    
-   </head>
-   
-   <body>    
+    <body>       
         
-        
-    <div class="container-narrow">
-
-      <div class="row-fluid marketing" style="margin: 60px 0 0 0;">
+       <!-- Static navbar -->
+        <nav class="navbar navbar-default navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="${pageContext.request.contextPath}/">Ontologia Indexador</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="${pageContext.request.contextPath}/">Ínicio</a></li>
+                <li  class="active"><a href="${pageContext.request.contextPath}/buscaTextual.jsp">Busca Textual</a></li>
+                <li><a href="${pageContext.request.contextPath}/buscaVisual.jsp">Busca Visual</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="${pageContext.request.contextPath}/sobre.jsp">Sobre</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>
+    
  
-      <jsp:include page="/includes/menu.jsp"/>
       
+        <div class="container">
+            
         
-       <div class="jumbotron" style="padding: 0px;">
-            <h1>Busca Textual</h1>
-            <p class="lead">
-                Busca dos conceitos e relacionamentos por texto
-            </p>
+            <div class="jumbotron centralizado">
+             <h1>Busca Textual</h1>
+             <strong class="lead">
+                 Busca dos conceitos e relacionamentos por texto
+             </strong>
+         </div>
+        
+        
+        
+        <div align="center">
+            
+            
+            <div id="fomulario" class="row">
+                <div class="col-md-12">
+              
+                    <div class="col-md-4 col-md-offset-1">
+                        <label class="col-md-12">Conceito</label>
+                    </div> 
+                    
+                    <div class="col-md-4">
+                        <label class="col-md-12">Tipos de Busca</label>
+                    </div>
+                    
+                </div>
+                
+                <div class="row col-md-12">
+                    <div class="col-md-4 col-md-offset-1">
+                        <input type="text" id ="conceito" name="conceito" class="col-md-12 input-lg" />
+                    </div>
+                    
+                    <div class="col-md-4">
+                        
+                        <select name="select" id="selecao" class="col-md-12 input-lg">
+                            <option name="click" onchange="l" value="l">Busca por Livro</option>
+                            <option name="click" onchange="r"  value="r">Busca por Relacionamento</option>
+                        </select>
+                       
+                    </div>
+                    
+                    <div class="col-md-2">
+                        <a href="#" id="btnEnviar"  class="btn btn-success btn-large input-lg centralizado col-md-12" style="font-size: 22px;">
+                            Buscar
+                        </a>
+                    </div>
+                    
+                    
+                    
+                </div>
+                
+            </div>  
+            
+            
+           
+        <!-- DIV MENSAGEM CAMPO REQUERIDO -->
+        <div id="divMensagemCampoRequerido" class="alert alert-warning col-md-10 col-md-offset-1" hidden="true" style="margin-top: 10px;">
+            Por favor, preencha todos os campos da busca.
         </div>
         
-        
-        
-        <div align="center" style="margin-bottom: -20px;">
-            
-            
-            <form id="fomulario">
-            <table width="588" border="0">
-              
-                <tr>
-                    <td width="224">
-                        <label>Conceito</label>
-                    </td> 
-                    
-                    <td width="106">
-                        Tipos de Busca
-                    </td>
-                    
-                </tr>
-                
-                <tr>
-                    <td> 
-                        <input type="text" id ="conceito" name="conceito" style="width:260px;" />
-                    </td>
-                    
-                    <td width="236">
-                       
-                            <select name="select" id="selecao">
-                                <option name="click" onchange="l" value="l">Busca por Livro</option>
-                                <option name="click" onchange="r"  value="r">Busca por Relacionamento</option>
-                            </select>
-                       
-                    </td>
-                    
-                    <td>
-                        <input type="submit" id="enviar" name="botaoEnviar" value="Buscar" style="margin-bottom: 10px; margin-left: 30px;"
-                               class="btn btn-success btn-large" />
-                    </td>
-                    
-                </tr>
-                
-                <tr>
-                    
-                    <td>
-                        &nbsp;
-                    </td>                    
-                </tr>
-         
-         <p>&nbsp;</p>        
-         </table>
-       </form>  
-                 
-       <div id="divAtualizar" style="visibility: hidden;">         
-        <table class="table table-bordered table-hover">
-            
-            <c:choose>
-                <c:when test="${livros != null }">
-                     <thead>
-                        <th>
-                            Autor
-                        </th>
-                        <th>
-                            Título
-                        </th>
-                        <th>
-                            Edição
-                        </th>
-                        <th>
-                            Cidade
-                        </th>
-                        <th>
-                            Editora
-                        </th>
-                        <th>
-                            Ano
-                        </th>
-                        <th>
-                            Páginas
-                        </th>
-                     </thead>
-                </c:when>
-                <c:otherwise>
-                    <thead>
-                    <th style="width: 120px;">
-                            Nó inicial
-                        </th>
-                        <th>
-                            Relacionamento
-                        </th>
-                        <th>
-                            Nó final
-                        </th>
-                     </thead>
-                </c:otherwise>
-            </c:choose>
+        <!-- DIV ATUALIZAR - Onde os resultados aparecem -->
+        <div id="divAtualizar"  style="visibility: hidden; margin-top: 10px;">         
+        <table id="tableAtualizar" class="table table-bordered table-hover col-md-12">
            
-            <c:forEach  var="livro" items="${livros}">
-               <tr>                    
-                    <td width="500">${livro.autor}</td>                   
-                    <td width="500">${livro.titulo}</td>
-                    <td>${livro.edicao}</td>              
-                    <td>${livro.cidade}</td>
-                    <td>${livro.editora}</td>
-                    <td>${livro.ano}</td>
-                    <td>${livro.paginas}</td>
-                </tr>
-            </c:forEach>
-       
-            <c:forEach  var="percorre" items="${percorre}">          
-                <tr> 
-                    <td>${percorre.noInicial}</td>
-                    <td>${percorre.tipoRelacionamento}</td>
-                    <td <td width="1728">>${percorre.noFinal}</td>
-                </tr>
-            </c:forEach>                         
-          </table>
+        <c:choose>
+                <%-- QUANDO AS DUAS LISTAS FOREM VAZIAS MOSTRA A MSG DE NEHNHUM RESULTADO --%>
+                <c:when test="${empty livros and empty percorre}">
+                    
+                    <!-- DIV MENSAGEM CAMPO REQUERIDO -->
+                    <div id="divMensagemCampoRequerido" class="alert alert-info col-md-10 col-md-offset-1" style="margin-top: 10px;">
+                        Nenhum resultado obtido.
+                    </div>
+
+                </c:when>
+                
+                <%-- SENAO, VAMOS CONFERIR QUAL LISTA EH E MONTAR A TABELA --%>
+                <c:otherwise>
+
+                    <c:choose>
+                        <c:when test="${livros != null }">
+                             <thead>
+                                <th>
+                                    Autor
+                                </th>
+                                <th>
+                                    Título
+                                </th>
+                                <th>
+                                    Edição
+                                </th>
+                                <th>
+                                    Cidade
+                                </th>
+                                <th>
+                                    Editora
+                                </th>
+                                <th>
+                                    Ano
+                                </th>
+                                <th>
+                                    Páginas
+                                </th>
+                             </thead>
+                        </c:when>
+                        <c:otherwise>
+                            <thead>
+                            <th style="width: 120px;">
+                                    Nó inicial
+                                </th>
+                                <th>
+                                    Relacionamento
+                                </th>
+                                <th>
+                                    Nó final
+                                </th>
+                             </thead>
+                        </c:otherwise>
+                    </c:choose> <%-- FIM CHOOSE LIVROS != NULL --%>
+
+                    <c:forEach  var="livro" items="${livros}">
+                       <tr>                    
+                            <td width="500">${livro.autor}</td>                   
+                            <td width="500">${livro.titulo}</td>
+                            <td>${livro.edicao}</td>              
+                            <td>${livro.cidade}</td>
+                            <td>${livro.editora}</td>
+                            <td>${livro.ano}</td>
+                            <td>${livro.paginas}</td>
+                        </tr>
+                    </c:forEach>
+
+                    <c:forEach  var="percorre" items="${percorre}">          
+                        <tr> 
+                            <td>${percorre.noInicial}</td>
+                            <td>${percorre.tipoRelacionamento}</td>
+                            <td <td width="1728">>${percorre.noFinal}</td>
+                        </tr>
+                    </c:forEach>  
+
+                </c:otherwise> <%-- FIM OTHERWISE WHEN (IF) TUDO VAZIO --%>
+        </c:choose>
+        </table>
         </div>
             
             
         </div>    
+            
+        </div>    
       
-
-      <hr style="margin: 30px 0;">
- 
-      </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <p class="text-muted">Desenvolvido por  <a href="https://github.com/willcehsar/">Willian César</a>  e <a href="https://github.com/FilipeNavas">Filipe Navas</a></p>
+                    </div>
+                    <div class="col-md-7">
+                        <p class="text-muted">Orientado por Profª Dra. Rosana Ferrareto, Profº Ms. Gustavo Prieto e Ms. Maria Carolina</p>
+                    </div>
+                    <div class="col-md-1">
+                        <p class="text-muted"><a href="https://sbv.ifsp.edu.br/">IFSP</a></p>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </footer>
       
-     
-     <jsp:include page="/includes/rodape.jsp"/>   
+      
+  
 
-    </div> <!-- /container -->
+
         
         
       
-    </body>
-
+    
+  </body>      
 </html>
   
   

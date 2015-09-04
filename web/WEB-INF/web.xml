@@ -4,9 +4,19 @@
         <servlet-name>ServletPercorrerOntologia</servlet-name>
         <servlet-class>sistemaontologia.servlets.ServletPercorrerOntologia</servlet-class>
     </servlet>
+    <servlet>
+        <description>Este Servlet retorna resultados Json.
+This Servlet returns Json results.</description>
+        <servlet-name>ServletJson</servlet-name>
+        <servlet-class>sistemaontologia.servlets.ServletJson</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletPercorrerOntologia</servlet-name>
         <url-pattern>/ServletPercorrerOntologia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletJson</servlet-name>
+        <url-pattern>/ServletJson</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

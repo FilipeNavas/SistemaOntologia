@@ -8,10 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Transaction;
+import org.neo4j.rest.graphdb.GraphDatabaseFactory;
+import org.neo4j.rest.graphdb.RestAPI;
 import org.neo4j.rest.graphdb.query.RestCypherQueryEngine;
 import org.neo4j.rest.graphdb.util.QueryResult;
-import sistemaontologia.conexaobanco.ConexaoBanco;
+import sistemaontologia.dao.conexaobanco.ConexaoBanco;
 import sistemaontologia.entidade.Livro;
 import sistemaontologia.entidade.PercorreConceito;
 
