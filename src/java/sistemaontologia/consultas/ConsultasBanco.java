@@ -16,8 +16,8 @@ import org.neo4j.rest.graphdb.RestAPI;
 import org.neo4j.rest.graphdb.query.RestCypherQueryEngine;
 import org.neo4j.rest.graphdb.util.QueryResult;
 import sistemaontologia.dao.conexaobanco.ConexaoBanco;
-import sistemaontologia.entidade.Livro;
-import sistemaontologia.entidade.PercorreConceito;
+import sistemaontologia.entidade.antigos.Livro;
+import sistemaontologia.entidade.antigos.PercorreConceito;
 
 
 /**

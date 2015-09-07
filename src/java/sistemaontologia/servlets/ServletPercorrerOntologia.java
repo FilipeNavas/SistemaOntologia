@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import sistemaontologia.consultas.ConsultasBanco;
-import sistemaontologia.entidade.Livro;
-import sistemaontologia.entidade.PercorreConceito;
+import sistemaontologia.entidade.antigos.Livro;
+import sistemaontologia.entidade.antigos.PercorreConceito;
 
 /**
  *

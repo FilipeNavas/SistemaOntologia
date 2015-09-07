@@ -14,7 +14,7 @@ import org.neo4j.rest.graphdb.RestAPIFacade;
 public class ConexaoBanco {
     public static RestAPI bd;
         
- public static RestAPI getConnection() {
+ public static RestAPI getConnection(){
     try {         
         
        //bd = new RestAPIFacade("http://localhost:7474/db/data", "neo4j", "graphs" );               

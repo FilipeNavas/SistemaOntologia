@@ -5,12 +5,21 @@
  */
 package sistemaontologia.dao.interfaces;
 
+import sistemaontologia.entidade.No;
+
 /**
  *
  * @author Filipe
  */
-public interface ConceitoInterface {
+public interface NoInterface {
     
+    /**
+     * Busca um No dado um id
+     * @param busca
+     * @return 
+     */
+    public No bucarNoPorId(String busca);
     
+    public void createNo();
     
 }

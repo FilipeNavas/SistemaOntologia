@@ -8,17 +8,16 @@ package sistemaontologia.servlets;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sistemaontologia.consultas.ConsultasBanco;
-import sistemaontologia.entidade.Livro;
-import sistemaontologia.entidade.PercorreConceito;
+import sistemaontologia.dao.impl.NoDao;
+import sistemaontologia.dao.impl.PercorreNoDao;
+import sistemaontologia.dao.interfaces.NoInterface;
+import sistemaontologia.dao.interfaces.PercorreNoInterface;
+import sistemaontologia.entidade.No;
 
 /**
  *
@@ -40,61 +39,82 @@ public class ServletJson extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-      //String conceito = request.getParameter("conceito");
+      String conceito = request.getParameter("conceito");
       String acao = request.getParameter("selecao");
       
-      try {  
-        if(acao.equals("l")) {
-        
-            //cria uma instância da classe ConsultaBanco
-            ConsultasBanco consulta = new ConsultasBanco();
-            
-            //cria uma lista de livros para receber a lista que o metodo buscarLivro vai retornar
-            List<Livro> livros = new ArrayList<>();
-            
-            //ter sido passado como parametro String para o metodo buscarLivro
-            livros = consulta.buscarLivro(request.getParameter("conceito"));
-            //livros = consulta.buscarLivro("java");
-            
-            //Converte para JSON            
-            // create a new Gson instance
-            Gson gson = new Gson();
-            
-            // convert your list to json
-            String jsonLivros = gson.toJson(livros);
-            
-            response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
-            
-            //Outro meio de mandar o Json
-            response.getWriter().write(jsonLivros);
-            
+        try {  
 
-        }else if(acao.equals("r")) {
-            
-            ConsultasBanco consulta = new ConsultasBanco();
-           
-            List<PercorreConceito> percorre = new ArrayList<>();
-            
-            percorre = consulta.bucarConceitos(request.getParameter("conceito"));
-            
-            
-            //Converte para JSON            
-            // create a new Gson instance
-            Gson gson = new Gson();
-            
-            // convert your list to json
-            String jsonLivros = gson.toJson(percorre);
-            
-            response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
-            
-            //Outro meio de mandar o Json
-            response.getWriter().write(jsonLivros);
-            
-        }//fim do else
-       
-        }catch (Exception exc){
+            if(acao.equals("todos")) {
+
+                //Cria um objeto de ConceitoDao
+                PercorreNoInterface percorreNoDao = new PercorreNoDao();
+
+                //Chama o metodo de busca
+                List lista = percorreNoDao.bucarTodos();
+
+                //Converte para JSON            
+                // create a new Gson instance
+                Gson gson = new Gson();
+
+                // convert your list to json
+                String jsonLivros = gson.toJson(lista);
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                //Outro meio de mandar o Json
+                response.getWriter().write(jsonLivros);
+
+            }else if(acao.equals("busca")) {
+
+                //Cria um objeto de ConceitoDao
+                PercorreNoInterface percorreNoDao = new PercorreNoDao();
+
+                //Chama o metodo de busca
+                List lista = percorreNoDao.bucarNos(conceito);
+
+                //Converte para JSON            
+                // create a new Gson instance
+                Gson gson = new Gson();
+
+                // convert your list to json
+                String jsonLivros = gson.toJson(lista);
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                //Outro meio de mandar o Json
+                response.getWriter().write(jsonLivros);
+
+            }else if(acao.equals("buscaNo")) {
+
+                //Pega o Id do no que esta no request
+                String idNo = request.getParameter("idNo");
+                
+                //Cria um objeto de NoInterface
+                NoInterface noDao = new NoDao();
+
+                //Chama o metodo de busca
+                No no = noDao.bucarNoPorId(idNo);
+                
+                //noDao.createNo();
+
+                //Converte para JSON            
+                // create a new Gson instance
+                Gson gson = new Gson();
+
+                // convert your list to json
+                String jsonLivros = gson.toJson(no);
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                //Outro meio de mandar o Json
+                response.getWriter().write(jsonLivros);
+
+            }//fim do else
+
+        }catch (IOException exc){
         }finally {            
             out.close();
         }//fim do finally

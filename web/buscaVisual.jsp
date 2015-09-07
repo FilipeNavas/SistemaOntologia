@@ -80,21 +80,23 @@
                 <div id="fomulario" class="row">
                     <div class="col-md-12">
 
-                        <div class="col-md-4 col-md-offset-1">
+                        <div class="col-md-6 col-md-offset-1">
                             <label class="col-md-12">Conceito</label>
                         </div> 
 
-                        <div class="col-md-4">
+                        <%--
+                        <div class="col-md-5">
                             <label class="col-md-12">Tipos de Busca</label>
                         </div>
-
+                        --%>
                     </div>
 
                     <div class="row col-md-12">
-                        <div class="col-md-4 col-md-offset-1">
+                        <div class="col-md-6 col-md-offset-1">
                             <input type="text" id ="conceito" name="conceito" class="col-md-12 input-lg" />
                         </div>
 
+                        <%--
                         <div class="col-md-4">
 
                             <select name="select" id="selecao" class="col-md-12 input-lg">
@@ -103,8 +105,9 @@
                             </select>
 
                         </div>
-
-                        <div class="col-md-2">
+                        --%>
+                        
+                        <div class="col-md-4">
                             <a href="#" id="btnEnviar"  class="btn btn-success btn-large input-lg centralizado col-md-12" style="font-size: 22px;">
                                 Buscar
                             </a>
@@ -124,32 +127,44 @@
         
         
         <div class="row col-md-12" style="margin-top: 20px;">
-            <div class="col-md-10" >
                 
+            <div class="col-md-12">
                 
-                <a href="#" class="btn btn-default btn-sm btn-overlay" onclick="resizeFocus();">
-                    <span class="glyphicon glyphicon-resize-small" aria-hidden="true"></span>
-                    Focar
-                </a>
+                <div class="row col-md-12">
+                    <div class="col-md-1">
+                        <a href="#" class="btn btn-default btn-sm overlay" onclick="resizeFocus();">
+                            <span class="glyphicon glyphicon-resize-small" aria-hidden="true"></span>
+                            Focar
+                        </a>
+                    </div>
+                    <div class="col-md-1">
+                        <a id="btnTodos" href="#" class="btn btn-default btn-sm overlay">
+                            <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                            Todos
+                        </a>
+                    </div>
+                    
+                    <div id="blockDetails" class="col-md-2 col-md-offset-10 overlay no-padding block-details"> 
+                    <table class="table table-bordered no-padding">
+                        <tbody>
+                        <th>
+                            Node 1
+                        </th>
+                        </tbody>
+                        <tr>
+                            <td>
+                                Oi
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                    
+                </div>
 
                 <div id="mynetwork" class="grafo"></div>
-                
 
-            </div>
-            <div id="blockDetails" class="col-md-2 grafo no-padding">
-                <table class="table table-bordered no-padding">
-                    <tbody>
-                    <th>
-                        Node 1
-                    </th>
-                    </tbody>
-                    <tr>
-                        <td>
-                            Oi
-                        </td>
-                    </tr>
-                </table>
-            </div>
+          
+            </div>    
             
         </div>
             
