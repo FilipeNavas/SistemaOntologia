@@ -5,6 +5,7 @@
  */
 package sistemaontologia.dao.interfaces;
 
+import java.util.List;
 import sistemaontologia.entidade.No;
 
 /**
@@ -20,6 +21,11 @@ public interface NoInterface {
      */
     public No bucarNoPorId(String busca);
     
-    public void createNo();
+    public void createNo(String nome, String descricao);
+    
+    /**
+     * Busca todos os nos que tem no BD
+     */
+    public List<No> buscarTodosNos();
     
 }

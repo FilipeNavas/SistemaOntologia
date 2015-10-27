@@ -5,14 +5,12 @@
  */
 package sistemaontologia.dao.impl;
 
-import com.sun.xml.ws.security.impl.policy.Constants;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import org.neo4j.cypher.ExecutionEngine;
 import org.neo4j.graphdb.Node;
-import org.neo4j.rest.graphdb.RestAPI;
 import org.neo4j.rest.graphdb.query.RestCypherQueryEngine;
-import org.neo4j.rest.graphdb.services.RequestType;
 import org.neo4j.rest.graphdb.util.QueryResult;
 import sistemaontologia.dao.conexaobanco.ConexaoBanco;
 import sistemaontologia.dao.interfaces.NoInterface;
@@ -97,48 +95,165 @@ public class NoDao implements NoInterface{
     
     
     @Override
-    public void createNo(){
+    public void createNo(String nome, String descricao){
         
-        //chama a conexão a partir da classe ConexaoBanco 
-        //RestAPI connection = ConexaoBanco.getConnection();
-        
+        //Cria uma engine
         engine = new RestCypherQueryEngine(ConexaoBanco.getConnection()); 
+        
+        //Pega o ultimo no para incrementar o id
+        No ultimoNo = pegarUltimoNo();
+        
+        String id;
+        
+        //Se o ultimoNo for vazio quer dizer q nao tem nada no BD.
+        if(ultimoNo.getId() == null){
+            id = "0";
+        }else{
+            //Cria o id a ser passado (adiciona 1 ao ultimo valor)
+            //Retorna a conta como uma String
+            id = String.valueOf(Integer.parseInt(ultimoNo.getId()) + 1);
+        }
         
         //cria um map chamado params para colocar chave/valor
         Map<String, Object> params = new HashMap<>();
-        params.put( "id", 5);
-        params.put( "nome", "PHP");
-        params.put( "descricao", "JAVA > PHP");
-        
-        //connection.createNode(params);
+        params.put( "id", id);
+        params.put( "nome", nome);
+        params.put( "descricao", descricao);
         
         
-        
-        QueryResult<Map<String,Object>> result = null;
-        
-        
-//        result = engine.query(
-//               "START n = node(*)"
-//               + " MATCH (n)"
-//               + " WHERE"
-//               + " has(n.id) and n.id=~{busca}"
-//               + " return n", params);
-
+        //Executa a query
         try{
-         //executa query
-         result = engine.query(
-                  " CREATE n VALUES {id :{id}, nome :{nome}, descricao :{descricao}}"
+            engine.query(
+                  " CREATE (n {id : {id}, nome : {nome}, descricao : {descricao}}) RETURN n"
                   , params);
         }catch(Exception e){
             e.printStackTrace();
         }
         
-        //Executa a query Cypher criando um nó com valores e passando
-        //para uma String result
-        //String result = connection.execute( RequestType.POST , "CREATE n VALUES {id :'5', nome :'PHP', descricao : 'PHP < Java'}", null).toString();
         
     }
     
+    
+    public No pegarUltimoNo(){
+        
+        engine = new RestCypherQueryEngine(ConexaoBanco.getConnection()); 
+         
+        /*
+        Match (n)
+        Return n
+        Order by ID(n) desc
+        Limit 1;
+        1*/
+        
+        QueryResult<Map<String,Object>> result = null;
+        
+        No no = new No();
+       
+        try{
+         //executa query
+         result = engine.query(
+                "Match (n)"
+                + " Return n"
+                + " Order by ID(n) desc"
+                + " Limit 1", null);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+       
+        //faz a iteração entre os nós com base no result da query, em que percorrerá cada nó
+        for (Map<String,Object> row : result) {
+
+             Node n = (Node) row.get("n");
+
+
+         for (String propriedade : n.getPropertyKeys()) {   
+
+             //Seta os atributos de NoInicial
+             switch (propriedade){
+
+                 case "id":
+                     no.setId(n.getProperty(propriedade).toString());
+                 break;
+
+                 case "nome":
+                     no.setNome(n.getProperty(propriedade).toString());
+                 break;
+
+                 case "descricao":
+                     no.setDescricao(n.getProperty(propriedade).toString());
+                 break;
+
+             }
+
+         }  
+
+
+       }//fim do for que percorre o result
+       
+        
+        //retorna o no
+        return no;  
+
+    }
+    
+    @Override
+    public List<No> buscarTodosNos(){
+        
+        engine = new RestCypherQueryEngine(ConexaoBanco.getConnection()); 
+        
+        QueryResult<Map<String,Object>> result = null;
+        
+        List listaDeNos = new ArrayList<>();
+        No no = new No();
+       
+        try{
+         //executa query
+         result = engine.query(
+                " Match (n)"
+                + " Return n", null);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+       
+        //faz a iteração entre os nós com base no result da query, em que percorrerá cada nó
+        for (Map<String,Object> row : result) {
+
+             Node n = (Node) row.get("n");
+
+
+         for (String propriedade : n.getPropertyKeys()) {   
+
+             //Seta os atributos de NoInicial
+             switch (propriedade){
+
+                 case "id":
+                     no.setId(n.getProperty(propriedade).toString());
+                 break;
+
+                 case "nome":
+                     no.setNome(n.getProperty(propriedade).toString());
+                 break;
+
+                 case "descricao":
+                     no.setDescricao(n.getProperty(propriedade).toString());
+                 break;
+
+             }
+
+         }  
+
+        listaDeNos.add(no);
+
+       }//fim do for que percorre o result
+       
+        
+        //retorna a lista
+        return listaDeNos;  
+
+    }
+
     
     
 }

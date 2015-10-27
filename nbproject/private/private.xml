@@ -3,27 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/servlets/ServletJson.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/entidade/PercorreNo.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/entidade/antigos/Categoria.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/web/resources/js/busca_textual.js</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/web/resources/css/custom.css</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/entidade/No.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/servlets/ServletPercorrerOntologia.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/dao/interfaces/NoInterface.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/dao/impl/PercorreNoDao.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/dao/conexaobanco/ConexaoBanco.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/web/resources/js/busca_visual.js</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/dao/antigo/ConceitoInterface.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/dao/impl/NoDao.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/dao/interfaces/PercorreNoInterface.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/entidade/Relacionamento.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/dao/antigo/ConceitoDao.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/entidade/antigos/PercorreConceito.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/web/buscaVisual.jsp</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/consultas/ConsultasBanco.java</file>
-            <file>file:/C:/Users/Filipe/Documents/NetBeansProjects/TCC/SistemaOntologia/src/java/sistemaontologia/entidade/antigos/Conceito.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

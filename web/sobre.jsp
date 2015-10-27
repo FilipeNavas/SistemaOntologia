@@ -78,16 +78,14 @@
                             Profº Ms.  Gustavo Aurélio Prieto <br>
                             Ms. Maria Carolina Gonçalves
                         </p>
+                        
+                        <hr>
                         <p>
                             Layout feito com <a href="http://getbootstrap.com">Bootstrap</a>
+                            <br>
+                            Grafo feito com <a href="http://visjs.org/index.html">Vis.js</a>
                         </p>
-
-                    </div>
-
-                    <div class="span2">
-
-                        <img src="${pageContext.request.contextPath}/resources/img/IFSP-transparente.png" 
-                             style="padding-top: 10px ;max-width: none;" width="200px" height="80px"/>
+   
                     </div>
 
                 </div>

@@ -111,6 +111,9 @@
                             <a href="#" id="btnEnviar"  class="btn btn-success btn-large input-lg centralizado col-md-12" style="font-size: 22px;">
                                 Buscar
                             </a>
+                            
+                            
+                            
                         </div>
                     </div>
 
@@ -132,7 +135,7 @@
                 
                 <div class="row col-md-12">
                     <div class="col-md-1">
-                        <a href="#" class="btn btn-default btn-sm overlay" onclick="resizeFocus();">
+                        <a id="btnFocar" href="#" class="btn btn-default btn-sm overlay">
                             <span class="glyphicon glyphicon-resize-small" aria-hidden="true"></span>
                             Focar
                         </a>
@@ -141,6 +144,12 @@
                         <a id="btnTodos" href="#" class="btn btn-default btn-sm overlay">
                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                             Todos
+                        </a>
+                    </div>
+                    <div class="col-md-1">
+                        <a id="" href="#" class="btn btn-default btn-sm overlay" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            Novo Nó
                         </a>
                     </div>
                     
@@ -185,6 +194,60 @@
                 
             </div>
         </footer>
+        
+        
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Criar novo nó</h4>
+              </div>
+              <div class="modal-body">
+                
+                  
+                    <form>
+
+                        <div class="form-group">
+                            <label for="nomeNo">Nome do Nó</label>
+                            <input id="nomeNo" type="text" class="form-control" id="nomeNo" placeholder="Nome">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descricaoNo">Descrição do Nó</label>
+                            <input id="descricaoNo" type="text" class="form-control" id="descricaoNo" placeholder="Descrição">
+                        </div>
+                        
+                        
+                        <a id="btnSalvarNo" href="#" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            Salvar Nó
+                        </a>
+                        <div id="msgSalvarNo" class="alert" style="margin-top: 10px;"></div>
+                        
+                       
+
+                    </form>
+                  
+                    <hr>
+                    <div>
+                        <div class="form-group">
+                            <label for="todosNos">Nós</label>
+                            <select id="selectTodosNos">
+                                
+                            </select>
+                        </div>
+                    </div>
+                  
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+          </div>
+        </div>
       
 
   </body>      

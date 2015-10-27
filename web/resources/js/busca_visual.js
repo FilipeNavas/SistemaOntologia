@@ -11,6 +11,15 @@ $(document).ready(function() {
     //Esconde o bloco de detalhes
     $('#blockDetails').hide();
     
+    //Esconde a msg de salvar o no caso ela esteja visivel
+    $("#msgSalvarNo").hide();
+    
+    //Quando o modal esconde (o user fecha ele), vamos esconder a msg do Salvar No
+    $('#myModal').on('hidden.bs.modal', function (e) {
+        //Esconde a msg de salvar o no caso ela esteja visivel
+        $("#msgSalvarNo").hide();
+    });
+    
     //############## BUSCA ###############
     
     $("#btnEnviar").click(function() {
@@ -141,7 +150,7 @@ $(document).ready(function() {
              
             //Remove a classe CSS de carregando na div
             //Chama a funcao que tira a classe CSS, passando um delay de meio segundo.
-            setTimeout( delay, 500 );
+            setTimeout( removeCarregandoDelay("#btnEnviar"), 500 );
 
            }
     
@@ -154,7 +163,11 @@ $(document).ready(function() {
     //################ TODOS #######################3
     $("#btnTodos").click(function() {
 
-                       
+            pegarTodosNos();
+    
+            //Adiciona a classe CSS de carregando na div
+            $("#mynetwork").addClass("carregando");
+            
             $.ajax({
                 type : "POST",
 
@@ -263,12 +276,49 @@ $(document).ready(function() {
              
             //Remove a classe CSS de carregando na div
             //Chama a funcao que tira a classe CSS, passando um delay de meio segundo.
-            setTimeout( delay, 500 );
- 
+            setTimeout( removeCarregandoDelay("#mynetwork"), 500 );
+            
     
     });
     
-  
+    
+    
+    //################ CRIAR NO #######################3
+    $("#btnSalvarNo").click(function() {
+            
+            var nomeNo = $("#nomeNo").val();
+            var descricaoNo = $("#descricaoNo").val();
+                       
+            $.ajax({
+                type : "POST",
+
+                url : "http://localhost:8080/SistemaOntologia/ServletJson",
+                data : "selecao=" + 'criarNo' + "&nomeNo=" + nomeNo + "&descricaoNo=" + descricaoNo,     
+                success : function(data) {
+                    console.log("CRIAR NO - Sucesso");
+                    $("#msgSalvarNo").addClass("alert-success");
+                    $("#msgSalvarNo").html("Nó salvo com sucesso!");
+                    $("#msgSalvarNo").fadeIn();
+                    
+                    //Apaga os campos
+                    $("#nomeNo").val('');
+                    $("#descricaoNo").val('');;
+                },
+                fail: function() {
+                    console.log("CRIAR NO - Erro");
+                    $("#msgSalvarNo").addClass("alert-warning");
+                    $("#msgSalvarNo").html("Problema ao criar Nó !");
+                    $("#msgSalvarNo").fadeIn();
+                }
+            });
+    });
+    
+    
+    //################ RESIZE FOCUS - REFOCAR #######################3
+    $("#btnFocar").click(function() {
+        resizeFocus();
+    });
+    
 }); 
 
 
@@ -336,12 +386,12 @@ function createGraph(nodes, edges){
                 hover: true
             },
             layout:{
-                //randomSeed: 1,
+                //randomSeed: 2,
                 //improvedLayout: true
 
                 
                 hierarchical: {
-                    //sortMethod: 'directed'
+                    //sortMethod: 'directed',
                     direction: 'UD', //UD, DU, LR, RL
                     levelSeparation: 150
                     
@@ -385,7 +435,37 @@ function resizeFocus(){
 }
 
 //Funcao que tira o carregando do botao Buscar
-function delay() 
+function removeCarregandoDelay(id) 
   {
-    $("#btnEnviar").removeClass("carregando");
+    $(id).removeClass("carregando");
   };
+ 
+function pegarTodosNos(){
+    
+     $.ajax({
+            type : "POST",
+
+            url : "http://localhost:8080/SistemaOntologia/ServletJson",
+            data : "selecao=" + 'buscaTodosNos',
+            success : function(data) {
+                
+                console.log("TODOS");
+                console.log(data);
+                
+                var options = "";
+                
+                $.each( data, function( key, val ) {
+                    
+                    options = options + "<option value='" + val.id + "'>" + val.nome + "</option>";
+                
+                });
+                
+                
+                $("#selectTodosNos").append(options);
+               
+            }
+        });
+    
+}
+  
+  
