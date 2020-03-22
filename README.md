@@ -16,6 +16,22 @@ Sistemas para Internet do IFSP.
 Tecnlogias Utilziadas: Java Web (JSP e Sevlets)
                        Neo4j - Banco de Dados em Grafo
                        JavaScript - VivaGraph.js
+
+
+## English - Ontology System
+
+Online Catalog based on Ontology for Libraries.
+
+Project developed for the Course Conclusion Project of the IFSP - Campus São João da Boa Vista-SP
+
+Students: Willian César and Filipe Navas Rodrigues
+
+Project uses the concept of ontology to form a network of concepts and relationships in books and areas that aims to
+facilitate the search and cataloging of books for librarians.
+
+Technologies: Java EE (JSP and Servlets)
+              Neo4j - Graph Database
+              JavaScript - VivaGraph.js
                        
                        
                        
